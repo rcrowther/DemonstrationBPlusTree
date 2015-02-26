@@ -7,11 +7,11 @@ Intro
 
 Will probably run on any post-Java7 and modern Scala. There's nothing special, and no dependencies, unless testing (put a Scalatest jar in the `/lib` folder).
 
-Comes with Create/Read/Update/Delete methods, and initial bulk-loading. Not just some graduate assignment or other coding exercise, but intended for study.
+Comes with Create/Read/Update/Delete methods, and initial bulk-loading. Not just some graduate assignment or other coding exercise - intended for study.
 
 Notes
 =====
-The B-Tree is deliberately coded in a clumsy way. It uses Arrays, which have little place in Scala. None of the methods use explicit recursion. Typing is explicit, but again, deliberately crude. No effort is expended on improving efficiency. These decisions were made because the code is intended as a clear demonstration of how a BPlusTree works, not as sturdy, extensible base code.
+The B-Tree is deliberately coded in a clumsy way. It uses Arrays, which have little place in Scala. None of the methods use explicit recursion. Typing is explicit, but again, deliberately crude. No effort is expended on improving efficiency. These decisions were made because the code is intended as a clear demonstration of how a BPlusTree works, not as a sturdy, extensible base code.
 
 However, the code should be easy to translate into other languages, and is massively annotated. Yeah, I wrote it, but for education and demonstration I'd figure it beats anything on the web. And I've looked round a lot (books are another matter, but I cann't afford books).
 
@@ -22,11 +22,11 @@ If a library containing Scalatest is added, the code includes some tests. These 
 
 If the code is compiled as Scala, then the DemonstrationBPlusTree class contains a main() method running a short demo, so, ::
 
-run tree.DemonstrationBPlusTree
+    run tree.DemonstrationBPlusTree
 
-...or however your IDE/build tool runs classes. This, or similar, will work, ::
+...or however your IDE/build tool runs classes. This, or similar, will work also, ::
 
-scala -toolcp <path to the compile> tree.DemonstrationBPlusTree
+    scala -toolcp <path to the compile> tree.DemonstrationBPlusTree
 
 
 
