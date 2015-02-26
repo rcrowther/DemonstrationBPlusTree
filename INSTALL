@@ -1,0 +1,5 @@
+The demonstration tree was  compiled with SSC, available from the same GitHub repositories as this BPlusTree,
+
+https://github.com/rcrowther/
+
+It may be compiled off the cuff with SBT, or some folder reorganisation may be necessary.

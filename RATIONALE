@@ -1,0 +1,82 @@
+Rationale
+---------
+What I wished for was demonstration code for a B+Tree. I ended up
+writing this. Scala stands shoulder-to-shoulder with Ruby for this
+kind of code, as for C++... I hope it is of use - it has been/will be
+to me.
+
+The implementation is intended as a clear demonstration of how a B+
+Tree works. It is not a simple `insert` mock-up --- it includes code
+for all common CRUD operations; create, update, read, and delete. It
+also has a bulk load method. Unfortunately, I could find no code for
+bulk-loading, but here's a way of doing it.
+
+Also, there is a method `fastIndexOf`. Seems to me that binary
+searching may be profitable when chasing down arrays. Especially if
+the branching factor (hence array length) is quite large (it's
+unlikely that the arrays will page out of memory, causing binary
+slowdown) --- though I find no mention in the available literature of
+this (Update: I found MongoDB's BTree implementation uses a binary
+search). `fastIndexOf` is not implemented, it's there for
+experimentation. It should be noted that Scala has binary searches on
+collections, so they are unnecessary for Scala implementations.
+
+The code is intended to be translatable into other more efficient or
+targeted forms (Scala or not). For this reason, the code is presented
+as a kind of pseudo-code. It also includes massive annotation,
+intended as a replacement for the lack of documentation on the
+web. The annotation is close to an example of literate programming,
+and describes implementation details such as how splits are performed.
+
+As a statement of intent, B+Trees have no data on nodes, only on
+leaves. This B+Tree must be supplied with unique keys. The public API
+should reject duplicate keys.
+ 
+The code is deliberately non-Scala-idomatic. If it was, the code
+design would use explicit recursion. But this code is intended to be
+translatable, perhaps into languages where recursion is either not an
+idiom or unsupported. For the same reason, the node contents are
+implemented as arrays. A Scala-idomatic implementation would likely
+implement nodes as a series of key/val containers within a sequence.
+  
+For performance, a Scala-idomatic translations should, at least, take
+more care over the generic arrays. It may also substitute other
+collection types. And re-implementations should reconsider the use of
+`while` loops. `While` loops may (potentially) be fast for an `Array`
+implementation, but for any other type of collection an iterator would
+be preferable. A high performance version would also inline or macro
+the array shifting operations.
+
+Finally, a true Scala-idomatic implementation would have a public
+interface in line with the Scala collection. This would take care to
+return copies, even if mutable operations such as `update` and
+`delete` are present, would accept other B+ Trees on construction, and
+be templated with a full range of `Traverable` methods. But, as this
+is a demonstration, Scala niceties have been avoided.
+
+However, where Scala is helpful, there are Scala idioms. `Option`, a
+Scala class which substitutes for `null`, is used several times. This
+is implemented because, once understood, it aids code clarity. For the
+same reason, the Scala collection has influenced the public API. And
+the code is constructed as a class - classless languages will need to
+reintroduce explicit parameters for root. That said, the
+implementation nearly satisfies the Scala Map-abstract. It needs the
+'+=' operator modifying, and a few methods marked as override (or
+those methods removed). Then it could inherit the
+Scala.collection.mutable Map abstract.
+
+In a few small areas of code, this tree is dissimilar to a pure B+Tree
+algorithm. Most notably, the root is always an empty leaf, whereas it
+should be represented as `null`. I see no reason why a 0-child root
+leaf should not be a valid state (though 1 child in root is plainly
+wrong). As I have no access to academic materials I can't check
+discussion on this. And, as I'm not famous, I can't assert I am
+correct. The real reason - I can't be bothered.
+
+Also, the algorithms have been broken up, most notably by using the
+`arrayShift` methods and friends, less evidently by breaking up some
+methods. Again, this aids readability. You may note that, as a result
+of this, it will be rather easy to spot simple translations of this
+code, as they will not resemble any other BTree code. Go on, give me a
+credit, 'cause we know what you're up to.
+
