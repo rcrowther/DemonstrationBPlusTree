@@ -9,6 +9,7 @@ Will probably run on any post-Java7 and modern Scala. There's nothing special, a
 
 Comes with Create/Read/Update/Delete methods, and initial bulk-loading. Not just some graduate assignment or other coding exercise - intended for study.
 
+
 Notes
 =====
 The B-Tree is deliberately coded in a clumsy way. It uses Arrays, which have little place in Scala. None of the methods use explicit recursion. Typing is explicit, but again, deliberately crude. No effort is expended on improving efficiency. These decisions were made because the code is intended as a clear demonstration of how a BPlusTree works, not as a sturdy, extensible base code.
@@ -41,13 +42,19 @@ Wikipedia
 `Wikipedia BPlusTree`_
 
 
-An alternative
---------------
+Alternatives
+------------
 A Scala immutable BTree. Unfortunately, heavily typed Scala can can confuse code outlines, and has here (the implementation uses generic arrays, if that means anything to you). A masterwork, likely for non-Scala users obscure,
 
 `Scala Immutable BTree`_
 
+A nice piece of code, fully implemented, and in Java, too,
+
+`Java BTree`_
+
+For this territory, not a good show.
 
 .. _Wikipedia BTrees: https://en.wikipedia.org/wiki/B-tree
 .. _Wikipedia BPlusTree: https://en.wikipedia.org/wiki/B%2B_tree 
 .. _Scala Immutable BTree: https://github.com/zilverline/scala-btree
+.. _Java BTree: https://code.google.com/p/java-algorithms-implementation/source/browse/src/com/jwetherell/algorithms/data_structures/BTree.java
